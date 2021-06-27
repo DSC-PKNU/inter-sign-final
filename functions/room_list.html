@@ -32,6 +32,7 @@
 
                 // session storage
                 sessionStorage.setItem('code', code);
+                localStorage.setItem('exist', true);
                 console.log("session storage: " + sessionStorage.getItem("code"));
                 window.location.href = '/join_room';
             }

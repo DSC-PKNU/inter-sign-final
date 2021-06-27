@@ -26,16 +26,27 @@ init();
 
 function init() {
   console.log("init() 호출");
-  title = document.title;
-  title = title.substring(0, title.length - 12);
-  console.log("app title: " + title);
+  // title = document.title;
+  // title = title.substring(0, title.length - 12);
+  // console.log("app title: " + title);
 
-  if (title == '') {
+  console.log("localStorage exist: " + localStorage.getItem("exist"));
+  if (localStorage.getItem("exist") == 'true') {
     var code = sessionStorage.getItem("code");
     getExistRoom(code);
   } else {
+    console.log("localStorage title: " + localStorage.getItem("title"));
+    title = localStorage.getItem("title");
+    document.title = title + " - InterSign";
     openUserMedia();
   }
+
+  // if (title == '') {
+  //   var code = sessionStorage.getItem("code");
+  //   getExistRoom(code);
+  // } else {
+  //   openUserMedia();
+  // }
 
   document.querySelector('#cameraBtn').addEventListener('click', openUserMedia);
   document.querySelector('#hangupBtn').addEventListener('click', hangUp);

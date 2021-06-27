@@ -62,6 +62,7 @@ app.post("/join_exist_room", function(request, response) {
   });
 });
 
+// join exist room
 app.get("/join_room", function(request, response) {
   console.log("get 방식의 join_room");
 
@@ -74,17 +75,22 @@ app.get("/join_room", function(request, response) {
 // create room
 app.post("/join_room", function(request, response) {
   console.log("post 방식의 join_room");
-  const title = request.body.title;
+  let title = request.body.title;
   if (!title) {
     title = "title";
   }
   console.log("방 제목: " + title);
 
-  response.render("chat_room.ejs", {"title": title}, function(err, html) {
-    if (err) {
-      console.log(err);
-    }
-    response.end(html);
+  // response.render("chat_room.ejs", {"title": title}, function(err, html) {
+  //   if (err) {
+  //     console.log(err);
+  //   }
+  //   response.end(html);
+  // });
+
+  fs.readFile("chat_room.html", function(error, data) {
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.end(data);
   });
 });
 
@@ -129,7 +135,7 @@ app.post("/save_room", function(req, res) {
 app.post("/hang_up", function(req, res) {
   const roomCode = req.body.code;
   console.log("서버 hang_up 호출: " + roomCode);
-    
+
   const dbRef = admin.database().ref("rooms/"+roomCode);
   dbRef.remove();
 

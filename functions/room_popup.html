@@ -6,16 +6,19 @@
         <link rel="stylesheet" href="./css/style.css">
         <script>
             function moveClose() {
-                var frm = document.room_info;
-                var title = "title";
-                window.opener.name = title;
-                frm.target = title;
-                //opener.parent.name = opener.parent.name || "opener_parent";
-                //frm.target = opener.parent.name;
-                frm.action = "join_room";
-                frm.submit();
+                // var frm = document.room_info;
+                // var title = "title";
+                // window.opener.name = title;
+                // frm.target = title;
+                // frm.action = "join_room";
+                // frm.submit();
 
-                // opener.location.href="join_room";
+                localStorage.setItem('title', document.querySelector("#form-title").value);
+                localStorage.setItem('exist', false);
+                console.log("session storage: " + localStorage.getItem("title"));
+                // window.location.href = '/join_room';
+
+                opener.location.href="join_room";
                 self.close();
             }
         </script>
@@ -29,7 +32,7 @@
         <form method="POST" name="room_info">
             <div class="create" id="room-title">
                 <h2 class="input-item" id="room-title">Room Title</h2>
-                <input class="input-item" type="text" name="title">
+                <input id="form-title" class="input-item" type="text" name="title">
             </div>
             <div class="create" id="language">
                 <h2 class="input-item" id="language">Language</h2>
