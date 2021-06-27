@@ -1,0 +1,175 @@
+/* App */
+@font-face {
+    src : url("/assets/fonts/NicoMoji-Regular.ttf");
+    font-family: "nico"
+}
+
+/* header */
+header {
+    height: 20vh;
+}
+
+.Home-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Home-logo {
+    height: 15vmin;
+    pointer-events: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.Home-background{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.Home-first-set{
+    position: absolute;
+}
+
+/* body */
+body {
+    margin: 1em;
+    height: 100vh;
+    color: rgba(0, 0, 0, 0.87);
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    padding: 0;
+}
+
+#message {
+    background: white;
+    max-width: 360px;
+    margin: 100px auto 16px;
+    padding: 32px 24px;
+    border-radius: 3px;
+}
+
+#message h2 {
+    color: #ffa100;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0 0 8px;
+}
+
+#message h1 {
+    font-size: 22px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.6);
+    margin: 0 0 16px;
+}
+
+#message p {
+    line-height: 140%;
+    margin: 16px 0 24px;
+    font-size: 14px;
+}
+
+#message a {
+    display: block;
+    text-align: center;
+    background: #039be5;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    padding: 16px;
+    border-radius: 4px;
+}
+
+#message, #message a {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#load {
+    color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+    body, #message {
+        margin-top: 0;
+        background: white;
+        box-shadow: none;
+    }
+
+    body {
+        border-top: 16px solid #ffa100;
+    }
+}
+
+button {
+    margin: 0.2em 0.1em;
+}
+
+div#videos {
+    /* height: 65vh; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.video {
+    background: black;
+    width: 50%;
+    height: 480px;
+    display: block;
+    text-align: center;
+}
+
+.text-container {
+    transform: translateY(-50px);
+    height: 0px; text-align: center;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+.Chat-Btn{
+    width: 190px;
+    height: 30px;
+    border-radius: 50px;
+    border: none;
+    background-color: #06BCC8;
+    align-content: center;
+    display: table; 
+    margin-left: auto; 
+    margin-right: auto;
+    margin-top: 1em;
+    padding: 10px;
+}
+
+.Exit-Logo {
+    width: 33%;
+    height: 30px;
+    margin-right: auto;
+    margin-left:auto;
+    cursor: pointer;
+}
+
+.Exit-Logo:hover {
+    box-shadow: 0 94px 0 0 rgba(0,0,0,0.25) inset,
+                0 -94px 0 0 rgba(0,0,0,0.25) inset;
+}
+
+span {
+    font-family: nico;
+}
+
+#hangupBtn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#cameraBtn {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 50%;
+    transform: translate(100%, -10%);
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>InterSign</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./css/style.css">
+        <script>
+            var myArray = [ {'No' : 1, 'Lang' : 'EN', 'Title' : 'Let\'s talk about...', 'People': 2}, 
+            {'No' : 2, 'Lang' : 'EN/KR', 'Title' : '영어 공부해요!/English study', 'People': 3}, 
+            {'No' : 3, 'Lang' : 'KR', 'Title' : '놀자~~~', 'People': 1}, ];
+
+            function buildTable(data) {
+                var table = document.getElementById('room-list');
+                for (var i=0; i < data.length; i++) {
+                    var row = `<tr id="room-row" onclick="sendByPost(${data[i].code});"> <td id="data-no">${data[i].no}</td> <td id="data-lang">${data[i].lang}</td> 
+                        <td id="data-title">${data[i].title}</td> <td id="data-people">${data[i].people}/4</td> </tr>`;
+                    table.innerHTML += row;
+                }
+            }
+
+            function sendByPost(code) {
+                console.log("리스트 코드: " + code);
+
+                const url = "join_exist_room";
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('POST', url, true);
+                var data = new Object();
+                data.code = code;
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(JSON.stringify(data));
+            }
+
+            // 리스트 생성
+            var jsonList = new Array();
+
+            function showPopup() { window.open("new_room", "a", "width=400, height=300, left=100, top=50"); }
+
+            function getRoomList() {
+                const request = new XMLHttpRequest();
+                const url = 'get_room_list';
+                request.open("GET", url);
+                request.send();
+
+                request.onload = (e) => {
+                    var resData = request.response;
+                    console.log(resData);
+                    resData = JSON.parse(resData);
+                    let keys = Object.getOwnPropertyNames(resData);
+                    console.log("parsing keys: " + keys);
+                    
+                    for(var i = 0; i < keys.length; i++){
+                        // 객체 생성
+                        var data = new Object();
+                        
+                        console.log("key: " + keys[i]);
+                        data.code = keys[i];
+                        var obj = resData[keys[i]];
+                        console.log("obj: " + obj.language + ", " + obj.num_of_people + ", " + obj.title);
+                        data.no = i + 1;
+                        data.lang = obj.language;
+                        data.people = obj.num_of_people;
+                        data.title = obj.title;
+                        
+                        // 리스트에 생성된 객체 삽입
+                        jsonList.push(data);
+                        console.log("json 데이터: " + data.lang + ", " + data.people + ", " + data.title);
+                    }
+
+                    buildTable(jsonList);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="background"></div>
+        <img id="small-logo" src="./assets/images/intersign_logo.png">
+        <h1 class="small-title">InterSign</h1>
+        <hr class="line" id="small-line">
+        <h2 class="sub-title">Join the new chat</h2>
+
+        <div id="refresh" onclick="getRoomList();">
+            <h2 id="refresh-text">Room List</h2>
+            <img id="refresh-img" src="./assets/images/refresh.png">
+        </div>
+        <table class="table">
+            <!-- <tr> <th>No.</th> <th>Lang</th> <th>Title</th> <th>People</th> </tr> -->
+            <tbody id="room-list"> </tbody>
+        </table>
+
+        <div id="page-num"></div>
+
+        <button id="new-button" onclick="showPopup();">New</button>
+    </body>
+</html>

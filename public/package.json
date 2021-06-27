@@ -1,0 +1,15 @@
+{
+  "name": "webrtc-codelab",
+  "version": "0.0.1",
+  "description": "WebRTC codelab",
+  "scripts": {
+    "start" : "nodemon index.js"
+  },
+  "dependencies": {
+    "@teachablemachine/image": "^0.8.4",
+    "@tensorflow/tfjs": "^3.3.0",
+    "node-static": "^0.7.10",
+    "nodemon": "^2.0.7",
+    "socket.io": "^2.0.4"
+  }
+}

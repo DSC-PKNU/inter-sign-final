@@ -1,0 +1,268 @@
+@font-face {
+    src : url("../assets/fonts/NicoMoji-Regular.ttf");
+    font-family: "nico"
+}
+
+@font-face {
+    src: url("../assets/fonts/NotoSansKR-Bold.otf");
+    font-family: "noto-bold";
+}
+
+@font-face {
+    src: url("../assets/fonts/NotoSansKR-Regular.otf");
+    font-family: "noto-regular";
+}
+
+@font-face {
+    src: url("../assets/fonts/NotoSansKR-Medium.otf");
+    font-family: "noto-medium";
+}
+
+body {
+    height: 100vh;
+    font-family: "nico";
+}
+
+button {
+    height: 47px;
+    background-color: #06BCC8;
+    border: 0;
+    outline: 0;
+    color: white;
+    border-radius: 50px;
+    font-size: 24px;
+    font-family: nico;
+    cursor: pointer;
+}
+
+button:hover {
+    color: black;
+    box-shadow: 0 94px 0 0 rgba(0,0,0,0.25) inset,
+                0 -94px 0 0 rgba(0,0,0,0.25) inset;
+}
+
+table {
+    position: absolute;
+    top: 170px;
+    left: 50%;
+    transform: translate(-50%, 0px);
+    border-collapse: collapse;
+    width: 640px;
+}
+
+h2#room-title {
+    width: 160px;
+}
+
+h2#language {
+    width: 160px;
+}
+
+.background {
+    z-index: -1;
+    width: 98vw;
+    height: 50vh;
+    background-image: url('../assets/images/white-yellow-grid.png');
+    background-repeat : no-repeat;
+}
+
+.big-title {
+    font-size: 36px;
+    position: absolute;
+    top: 252px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.small-title {
+    font-size: 36px;
+    position: absolute;
+    top: 30px;
+    left: 143px;
+    transform: translate(0, -50%);
+}
+
+.line { 
+    width: 281px;
+    height: 4px;
+    background-color: #06BCC8;
+    border: none;
+    position: absolute;
+}
+
+.sub-title {
+    font-size: 18px;
+    position: absolute;
+    top: 56px;
+    left: 416px;
+    transform: translate(0, -50%);
+}
+
+.create {
+}
+
+.create#room-title {
+    position: absolute;
+    top: 80px;
+    left: 40px;
+}
+
+.create#language {
+    position: absolute;
+    top: 120px;
+    left: 40px;
+}
+
+.input-item {
+    display: inline-block;
+}
+
+.popup {
+    background-image: none;
+}
+
+#big-logo {
+    width: 137px;
+    height: 136px;
+    position: absolute;
+    top: 87px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#small-logo {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: 27px;
+    left: 21px;
+}
+
+#big-line {
+    top: 295px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#small-line {
+    top: 73px;
+    left: 116px;
+}
+
+#desc {
+    position: absolute;
+    top: 332px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#start-button {
+    width: 150px;
+    position: absolute;
+    top: 395px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    transition:all 0.9s, color 0.3;
+}
+
+#refresh {
+    cursor: pointer;
+    /* display: inline-block; */
+}
+
+#refresh-text {
+    font-size: 18px;
+    position: absolute;
+    top: 141px;
+    left: 29%;
+}
+
+#refresh-img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 157px;
+    left: 37%;
+}
+
+#room-list {
+    font-size: 18px;
+    margin-bottom: 11px;
+    width: 645px;
+    height: 49px;
+    position: absolute;
+    top: 10px;
+}
+
+#room-row {
+    cursor: pointer;
+    border: 1px solid #06BCC8;
+    background-color: white;
+}
+
+#data-no {
+    font-family: "noto-bold";
+    color: #06BCC8;
+    width: 30px;
+}
+
+#data-lang {
+    font-family: "noto-bold";
+    color: #B0B0B0;
+    width: 60px;
+}
+
+#data-title {
+    font-family: "noto-regular";
+    color: #5C5C5C;
+    width: 500px;
+}
+
+#data-people {
+    font-family: "noto-medium";
+    color: #06BCC8;
+    width: 30px;
+}
+
+#new-button {
+    position: absolute;
+    width: 107px;
+    top: 467px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#popup-title {
+    left: 48px;
+}
+
+#popup-line {
+    top: 73px;
+    left: 21px;
+}
+
+#popup-sub {
+    left: 321px;
+}
+
+#create-button {
+    height: 47px;
+    background-color: #06BCC8;
+    border: 0;
+    outline: 0;
+    color: white;
+    border-radius: 50px;
+    font-size: 24px;
+    font-family: nico;
+    cursor: pointer;
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#create-button:hover {
+    color: black;
+    box-shadow: 0 94px 0 0 rgba(0,0,0,0.25) inset,
+                0 -94px 0 0 rgba(0,0,0,0.25) inset;
+}
