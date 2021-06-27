@@ -1,5 +1,3 @@
-// import firebase from "firebase/app";
-
 mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
 
 const configuration = {
@@ -22,12 +20,24 @@ let roomId = null;
 let channel = null;
 
 var title = null;
+var curRoomData = new Object();
+
+init();
 
 function init() {
   console.log("init() 호출");
-  title = document.title.split(' ')[0];
+  title = document.title;
+  title = title.substring(0, title.length - 12);
+  console.log("app title: " + title);
+
+  if (title == '') {
+    var code = sessionStorage.getItem("code");
+    getExistRoom(code);
+  } else {
+    openUserMedia();
+  }
+
   document.querySelector('#cameraBtn').addEventListener('click', openUserMedia);
-  openUserMedia();
   document.querySelector('#hangupBtn').addEventListener('click', hangUp);
   document.querySelector('#createBtn').addEventListener('click', createRoom);
   document.querySelector('#joinBtn').addEventListener('click', joinRoom);
@@ -235,6 +245,23 @@ async function openUserMedia(e) {
   createRoom();
 }
 
+async function openUserMediaAndJoin(code) {
+  const stream = await navigator.mediaDevices.getUserMedia(
+      {video: true, audio: true});
+  document.querySelector('#localVideo').srcObject = stream;
+  localStream = stream;
+  remoteStream = new MediaStream();
+  document.querySelector('#remoteVideo').srcObject = remoteStream;
+
+  console.log('Stream:', document.querySelector('#localVideo').srcObject);
+  document.querySelector('#cameraBtn').disabled = true;
+  document.querySelector('#joinBtn').disabled = false;
+  document.querySelector('#createBtn').disabled = false;
+  document.querySelector('#hangupBtn').disabled = false;
+
+  joinRoomById(code);
+}
+
 async function hangUp(e) {
   const tracks = document.querySelector('#localVideo').srcObject.getTracks();
   tracks.forEach(track => {
@@ -270,11 +297,9 @@ async function hangUp(e) {
       await candidate.ref.delete();
     });
     await roomRef.delete();
-
-    sendHangup(roomId);
   }
 
-  document.location.reload(true);
+  sendHangup(roomId);
 }
 
 function registerPeerConnectionListeners() {
@@ -296,9 +321,6 @@ function registerPeerConnectionListeners() {
         `ICE connection state change: ${peerConnection.iceConnectionState}`);
   });
 }
-
-init();
-
 
 
 /* Interpretation part */
@@ -381,4 +403,36 @@ function sendHangup(code) {
   data.code = code;
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.send(JSON.stringify(data));
+
+  window.location.href = "/room_list";
+}
+
+function getExistRoom(code) {
+  console.log("getExistRoom 호출: " + code);
+  openUserMediaAndJoin(code);
+
+  var data = new Object();
+  data.code = code;
+  const request = new XMLHttpRequest();
+  const url = 'join_exist_room';
+  request.open("POST", url, true);
+  request.setRequestHeader("Content-Type", "application/json");
+  request.send(JSON.stringify(data));
+
+  request.onload = (e) => {
+    var resData = request.response;
+    resData = JSON.parse(resData);
+    console.log(resData);
+
+    console.log("resData: " + resData.language + ", " + resData.num_of_people + ", " + resData.title);
+    curRoomData.lang = resData.language;
+    curRoomData.people = resData.num_of_people;
+    curRoomData.title = resData.title;
+
+    console.log("json 데이터: " + curRoomData.lang + ", " + curRoomData.people + ", " + curRoomData.title);
+    
+    title = curRoomData.title;
+    console.log("Current room title: " + title);
+    document.title = title + " - InterSign";
+  }
 }

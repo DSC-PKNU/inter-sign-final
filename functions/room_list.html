@@ -12,7 +12,7 @@
             function buildTable(data) {
                 var table = document.getElementById('room-list');
                 for (var i=0; i < data.length; i++) {
-                    var row = `<tr id="room-row" onclick="sendByPost(${data[i].code});"> <td id="data-no">${data[i].no}</td> <td id="data-lang">${data[i].lang}</td> 
+                    var row = `<tr id="room-row" onclick="sendByPost('${data[i].code}');"> <td id="data-no">${data[i].no}</td> <td id="data-lang">${data[i].lang}</td> 
                         <td id="data-title">${data[i].title}</td> <td id="data-people">${data[i].people}/4</td> </tr>`;
                     table.innerHTML += row;
                 }
@@ -21,14 +21,19 @@
             function sendByPost(code) {
                 console.log("리스트 코드: " + code);
 
-                const url = "join_exist_room";
-                var xhr = new XMLHttpRequest();
+                // const url = "join_exist_room";
+                // var xhr = new XMLHttpRequest();
 
-                xhr.open('POST', url, true);
-                var data = new Object();
-                data.code = code;
-                xhr.setRequestHeader("Content-Type", "application/json");
-                xhr.send(JSON.stringify(data));
+                // xhr.open('POST', url, true);
+                // var data = new Object();
+                // data.code = code;
+                // xhr.setRequestHeader("Content-Type", "application/json");
+                // xhr.send(JSON.stringify(data));
+
+                // session storage
+                sessionStorage.setItem('code', code);
+                console.log("session storage: " + sessionStorage.getItem("code"));
+                window.location.href = '/join_room';
             }
 
             // 리스트 생성

@@ -23,12 +23,14 @@ app.get("/", function(request, response) {
     response.end(data);
   });
 });
+
 app.get("/room_list", function(request, response) {
   fs.readFile("room_list.html", function(error, data) {
     response.writeHead(200, {"Content-Type": "text/html"});
     response.end(data);
   });
 });
+
 app.get("/new_room", function(request, response) {
   fs.readFile("room_popup.html", function(error, data) {
     response.writeHead(200, {"Content-Type": "text/html"});
@@ -37,12 +39,14 @@ app.get("/new_room", function(request, response) {
 });
 
 // join room
-app.get("/join_exist_room", function(request, response) {
-  console.log("post 방식의 join_exist_room");
+app.post("/join_exist_room", function(request, response) {
+  console.log("get 방식의 join_exist_room");
   const code = request.body.code;
   let lang;
   let ppl;
   let title;
+
+  console.log("Received code: " + code.toString());
 
   // db 불러오기
   const dbRef = admin.database().ref("rooms/" + code);
@@ -53,26 +57,29 @@ app.get("/join_exist_room", function(request, response) {
     title = data.title;
 
     console.log("db에서 가져온 data: " + lang + ", " + ppl + ", " + title);
-  });
 
-  response.render("chat_room_join.ejs",
-      {"title": title, "lang": lang, "ppl": ppl, "code": code},
-      function(err, html) {
-        if (err) {
-          console.log(err);
-        }
-        response.end(html);
-      });
+    response.send(data);
+  });
 });
+
+app.get("/join_room", function(request, response) {
+  console.log("get 방식의 join_room");
+
+  fs.readFile("chat_room.html", function(error, data) {
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.end(data);
+  });
+});
+
 // create room
 app.post("/join_room", function(request, response) {
   console.log("post 방식의 join_room");
   const title = request.body.title;
+  if (!title) {
+    title = "title";
+  }
   console.log("방 제목: " + title);
-  // fs.readFile("chat_room.html", function(error, data) {
-  //   response.writeHead(200, {"Content-Type": "text/html"});
-  //   response.end(data);
-  // });
+
   response.render("chat_room.ejs", {"title": title}, function(err, html) {
     if (err) {
       console.log(err);
@@ -121,12 +128,15 @@ app.post("/save_room", function(req, res) {
 
 app.post("/hang_up", function(req, res) {
   const roomCode = req.body.code;
-
   console.log("서버 hang_up 호출: " + roomCode);
-
+    
   const dbRef = admin.database().ref("rooms/"+roomCode);
   dbRef.remove();
 
+  // fs.readFile("room_list.html", function(error, data) {
+  //   response.writeHead(200, {"Content-Type": "text/html"});
+  //   response.end(data);
+  // });
   res.end();
 });
 
