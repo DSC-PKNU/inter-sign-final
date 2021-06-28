@@ -35,6 +35,7 @@ public
 
 ## 🌏 DEVELOPER
 
+|:------------------:|:-------------------------:|:----------------------------------------------:|
 | 김보금 Bogeum Kim  | ML DEVELOPER              | [@nsbg](https://github.com/nsbg)               |
 | 김혜성 Hyesung Kim | WEB DEVELOPER             | [@Hyesung82](https://github.com/Hyesung82)     |
 | 박다봄 Dabom Park  | DESIGNER & VIDEO PRODUCER | [@emptyshores](https://github.com/emptyshores) |
