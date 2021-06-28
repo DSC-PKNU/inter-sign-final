@@ -35,7 +35,7 @@ public
 
 ## 🌏 DEVELOPER
 
-|NAME                |ROLE                       |Github                                          |
+|NAME                |ROLE                       |GITHUB                                          |
 |:------------------:|:-------------------------:|:----------------------------------------------:|
 | 김보금 Bogeum Kim  | ML DEVELOPER              | [@nsbg](https://github.com/nsbg)               |
 | 김혜성 Hyesung Kim | WEB DEVELOPER             | [@Hyesung82](https://github.com/Hyesung82)     |
