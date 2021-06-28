@@ -167,6 +167,11 @@ span {
     font-family: nico;
 }
 
+#localVideo {
+    transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg);
+}
+
 #hangupBtn {
     width: 30px;
     height: 30px;
