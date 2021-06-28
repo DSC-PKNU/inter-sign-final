@@ -1,4 +1,4 @@
-# Inter-Sign
+# InterSign
 Video chat service for international sign language exchange
 
 
