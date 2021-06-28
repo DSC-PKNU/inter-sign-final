@@ -3,9 +3,6 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 
-app.set("views", __dirname + "/views");
-app.set("view engine", "ejs");
-
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -45,21 +42,26 @@ app.post("/join_exist_room", function(request, response) {
   let lang;
   let ppl;
   let title;
+  let updates = {};
+  let data = null;
 
   console.log("Received code: " + code.toString());
 
   // db 불러오기
   const dbRef = admin.database().ref("rooms/" + code);
-  dbRef.on("value", (snapshot) => {
-    const data = snapshot.val();
+  dbRef.once("value", (snapshot) => {
+    data = snapshot.val();
     lang = data.language;
     ppl = data.num_of_people;
     title = data.title;
 
     console.log("db에서 가져온 data: " + lang + ", " + ppl + ", " + title);
-
-    response.send(data);
   });
+
+  updates["/rooms/" + code + "/num_of_people"] = parseInt(ppl) + 1;
+  admin.database().ref().update(updates);
+
+  response.send(data);
 });
 
 // join exist room
@@ -81,13 +83,6 @@ app.post("/join_room", function(request, response) {
   }
   console.log("방 제목: " + title);
 
-  // response.render("chat_room.ejs", {"title": title}, function(err, html) {
-  //   if (err) {
-  //     console.log(err);
-  //   }
-  //   response.end(html);
-  // });
-
   fs.readFile("chat_room.html", function(error, data) {
     response.writeHead(200, {"Content-Type": "text/html"});
     response.end(data);
@@ -96,11 +91,14 @@ app.post("/join_room", function(request, response) {
 
 app.get("/get_room_list", function(req, res) {
   const dbRef = admin.database().ref("rooms");
+  let data = null;
+
   dbRef.on("value", (snapshot) => {
-    const data = snapshot.val();
+    data = snapshot.val();
     console.log(data);
-    res.send(data);
   });
+
+  res.send(data);
 });
 
 app.post("/save_room", function(req, res) {
@@ -136,14 +134,28 @@ app.post("/hang_up", function(req, res) {
   const roomCode = req.body.code;
   console.log("서버 hang_up 호출: " + roomCode);
 
-  const dbRef = admin.database().ref("rooms/"+roomCode);
-  dbRef.remove();
+  let data = null;
+  let updates = {};
+  let resData = {};
 
-  // fs.readFile("room_list.html", function(error, data) {
-  //   response.writeHead(200, {"Content-Type": "text/html"});
-  //   response.end(data);
-  // });
-  res.end();
+  // Number of people
+  var dbNopRef = admin.database().ref('rooms/' + roomCode + '/num_of_people');
+  dbNopRef.once('value', (snapshot) => {
+    data = snapshot.val();
+    console.log("/hang_up data: " + data);
+    resData["num"] = data;
+
+    if (data == "1") {
+      const dbRef = admin.database().ref("rooms/"+roomCode);
+      dbRef.remove();
+      console.log("/hang_up data removed");
+    } else {
+      updates["/rooms/" + roomCode + "/num_of_people"] = parseInt(data) - 1;
+      admin.database().ref().update(updates);
+    }
+  });
+
+  res.send(resData);
 });
 
 // app.listen(3000, function() {

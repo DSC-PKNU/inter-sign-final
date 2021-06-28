@@ -312,7 +312,8 @@ async function init() {
     metadataURL = URL + "metadata.json";
   }
   else {
-    URL = "../asl-model/my_model/";
+    // URL = "../asl-model/my_model/";
+    URL = "../asl-model/new_model/";
     modelURL = URL + "model.json";
     metadataURL = URL + "metadata.json";
   }
@@ -357,6 +358,6 @@ async function predict() {
         const classPrediction = prediction[i].probability.toFixed(2) >= 0.75 ? prediction[i].className : ' ';
         labelContainer.childNodes[i].innerHTML = classPrediction;
 
-        // socket.emit('interpret', classPrediction);/
+        // socket.emit('interpret', classPrediction);
     }
 }

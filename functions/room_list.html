@@ -5,9 +5,7 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="./css/style.css">
         <script>
-            var myArray = [ {'No' : 1, 'Lang' : 'EN', 'Title' : 'Let\'s talk about...', 'People': 2}, 
-            {'No' : 2, 'Lang' : 'EN/KR', 'Title' : '영어 공부해요!/English study', 'People': 3}, 
-            {'No' : 3, 'Lang' : 'KR', 'Title' : '놀자~~~', 'People': 1}, ];
+            window.onload = getRoomList();
 
             function buildTable(data) {
                 var table = document.getElementById('room-list');
@@ -37,12 +35,12 @@
                 window.location.href = '/join_room';
             }
 
-            // 리스트 생성
-            var jsonList = new Array();
-
             function showPopup() { window.open("new_room", "a", "width=400, height=300, left=100, top=50"); }
 
             function getRoomList() {
+                // 리스트 생성
+                var jsonList = new Array();
+
                 const request = new XMLHttpRequest();
                 const url = 'get_room_list';
                 request.open("GET", url);
@@ -73,19 +71,32 @@
                         console.log("json 데이터: " + data.lang + ", " + data.people + ", " + data.title);
                     }
 
+                    removeTable();
                     buildTable(jsonList);
                 }
+            }
+
+            function removeTable() {
+                console.log("removeTable 호출");
+
+                var element = document.getElementsByTagName("tbody")[0];
+                element.remove();
+
+                var parent = document.getElementsByTagName("table")[0];
+                var child = document.createElement("tbody");
+                child.setAttribute("id", "room-list");
+                parent.append(child);
             }
         </script>
     </head>
     <body>
         <div class="background"></div>
-        <img id="small-logo" src="./assets/images/intersign_logo.png">
-        <h1 class="small-title">InterSign</h1>
+        <img id="small-logo" src="./assets/images/intersign_logo.png" onclick="location.href='/'">
+        <h1 class="small-title" onclick="location.href='/'">InterSign</h1>
         <hr class="line" id="small-line">
         <h2 class="sub-title">Join the new chat</h2>
 
-        <div id="refresh" onclick="getRoomList();">
+        <div id="refresh" onclick="getRoomList()">
             <h2 id="refresh-text">Room List</h2>
             <img id="refresh-img" src="./assets/images/refresh.png">
         </div>

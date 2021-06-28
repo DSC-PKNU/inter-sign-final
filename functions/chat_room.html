@@ -20,77 +20,73 @@
 </head>
 
 <body>
-<header class="Home-header">
-    <img src="assets/images/yellow_background.jpg" class="Home-background" alt="background"/>
-    <a class="Home-first-set">
-        <img src="assets/images/intersign_logo.png" class="Home-logo" alt="logo"/>
-    </a>
-</header>
+    <div class="background"></div>
+    <img id="big-logo" src="./assets/images/intersign_logo.png" onclick="location.href='/'">
 
-<div id="videos">
-    <div class="video">
-        <div id="webcam-container" class="webcam" style="display:none;"></div>
-        <video id="localVideo" muted autoplay playsinline></video>
-        <div id="label-container" class="text-container"></div>
-    </div>
-    <div class="video">
-        <video id="remoteVideo" autoplay playsinline></video>
-        <div id="remoteLabel-container" class="text-container"></div>
-    </div>
-</div>
-
-<div class="Chat-Btn">
-    <img class="Exit-Logo" src="assets/images/mic.svg" alt="mic"/>
-    <img id="hangupBtn"  class="Exit-Logo" src="assets/images/remove.png" alt="chat_block"/>
-    <img id="cameraBtn" class="Exit-Logo" src="assets/images/chat_camera.svg" alt="chat_camera"/>
-</div>
-
-<div id="buttons">
-    <button class="mdc-button mdc-button--raised" disabled id="createBtn">
-        <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
-        <span class="mdc-button__label">Create room</span>
-    </button>
-    <button class="mdc-button mdc-button--raised" disabled id="joinBtn">
-        <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
-        <span class="mdc-button__label">Join room</span>
-    </button>
-</div>
-
-<div>
-    <span id="currentRoom"></span>
-</div>
-
-<div class="mdc-dialog"
-     id="room-dialog"
-     role="alertdialog"
-     aria-modal="true"
-     aria-labelledby="my-dialog-title"
-     aria-describedby="my-dialog-content">
-    <div class="mdc-dialog__container">
-        <div class="mdc-dialog__surface">
-            <h2 class="mdc-dialog__title" id="my-dialog-title">Join room</h2>
-            <div class="mdc-dialog__content" id="my-dialog-content">
-                Enter ID for room to join:
-                <div class="mdc-text-field">
-                    <input type="text" id="room-id" class="mdc-text-field__input">
-                    <label class="mdc-floating-label" for="my-text-field">Room ID</label>
-                    <div class="mdc-line-ripple"></div>
-                </div>
-            </div>
-            <footer class="mdc-dialog__actions">
-                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
-                    <span class="mdc-button__label">Cancel</span>
-                </button>
-                <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button"
-                        data-mdc-dialog-action="yes">
-                    <span class="mdc-button__label">Join</span>
-                </button>
-            </footer>
+    <div id="videos">
+        <div class="video">
+            <div id="webcam-container" class="webcam" style="display:none;"></div>
+            <video id="localVideo" muted autoplay playsinline></video>
+            <div id="label-container" class="text-container"></div>
+        </div>
+        <div class="video">
+            <video id="remoteVideo" autoplay playsinline></video>
+            <div id="remoteLabel-container" class="text-container"></div>
         </div>
     </div>
-    <div class="mdc-dialog__scrim"></div>
-</div>
 
-<script src="app.js"></script>
+    <div class="Chat-Btn">
+        <img class="Exit-Logo" src="assets/images/mic.svg" alt="mic"/>
+        <img id="hangupBtn"  class="Exit-Logo" src="assets/images/remove.png" alt="chat_block"/>
+        <img id="cameraBtn" class="Exit-Logo" src="assets/images/chat_camera.svg" alt="chat_camera"/>
+    </div>
+
+    <!-- <div id="buttons">
+        <button class="mdc-button mdc-button--raised" disabled id="createBtn">
+            <i class="material-icons mdc-button__icon" aria-hidden="true">group_add</i>
+            <span class="mdc-button__label">Create room</span>
+        </button>
+        <button class="mdc-button mdc-button--raised" disabled id="joinBtn">
+            <i class="material-icons mdc-button__icon" aria-hidden="true">group</i>
+            <span class="mdc-button__label">Join room</span>
+        </button>
+    </div> -->
+
+    <div>
+        <span id="currentRoom"></span>
+    </div>
+
+    <!-- <div class="mdc-dialog"
+        id="room-dialog"
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="my-dialog-title"
+        aria-describedby="my-dialog-content">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface">
+                <h2 class="mdc-dialog__title" id="my-dialog-title">Join room</h2>
+                <div class="mdc-dialog__content" id="my-dialog-content">
+                    Enter ID for room to join:
+                    <div class="mdc-text-field">
+                        <input type="text" id="room-id" class="mdc-text-field__input">
+                        <label class="mdc-floating-label" for="my-text-field">Room ID</label>
+                        <div class="mdc-line-ripple"></div>
+                    </div>
+                </div>
+                <footer class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                        <span class="mdc-button__label">Cancel</span>
+                    </button>
+                    <button id="confirmJoinBtn" type="button" class="mdc-button mdc-dialog__button"
+                            data-mdc-dialog-action="yes">
+                        <span class="mdc-button__label">Join</span>
+                    </button>
+                </footer>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div> -->
+
+    <script src="app.js"></script>
 </body>
 </html>

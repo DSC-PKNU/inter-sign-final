@@ -19,7 +19,7 @@
 }
 
 body {
-    height: 100vh;
+    height: 97vh;
     font-family: "nico";
 }
 
@@ -61,7 +61,7 @@ h2#language {
 .background {
     z-index: -1;
     width: 98vw;
-    height: 50vh;
+    height: 40vh;
     background-image: url('../assets/images/white-yellow-grid.png');
     background-repeat : no-repeat;
 }
@@ -69,9 +69,10 @@ h2#language {
 .big-title {
     font-size: 36px;
     position: absolute;
-    top: 252px;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
+    cursor: pointer;
 }
 
 .small-title {
@@ -80,6 +81,7 @@ h2#language {
     top: 30px;
     left: 143px;
     transform: translate(0, -50%);
+    cursor: pointer;
 }
 
 .line { 
@@ -125,9 +127,10 @@ h2#language {
     width: 137px;
     height: 136px;
     position: absolute;
-    top: 87px;
+    top: 9%;
     left: 50%;
     transform: translate(-50%, 0);
+    cursor: pointer;
 }
 
 #small-logo {
@@ -136,10 +139,11 @@ h2#language {
     position: absolute;
     top: 27px;
     left: 21px;
+    cursor: pointer;
 }
 
 #big-line {
-    top: 295px;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, 0);
 }
@@ -150,16 +154,19 @@ h2#language {
 }
 
 #desc {
+    font-family: monospace;
+    font-size: 28px;
     position: absolute;
-    top: 332px;
+    top: 52%;
     left: 50%;
     transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 #start-button {
     width: 150px;
     position: absolute;
-    top: 395px;
+    top: 70%;
     left: 50%;
     transform: translate(-50%, 0);
     transition:all 0.9s, color 0.3;
@@ -198,12 +205,14 @@ h2#language {
     cursor: pointer;
     border: 1px solid #06BCC8;
     background-color: white;
+    height: 50px;
 }
 
 #data-no {
     font-family: "noto-bold";
     color: #06BCC8;
     width: 30px;
+    padding: 5px;
 }
 
 #data-lang {
@@ -227,8 +236,8 @@ h2#language {
 #new-button {
     position: absolute;
     width: 107px;
-    top: 467px;
-    left: 50%;
+    top: 130px;
+    left: 67%;
     transform: translate(-50%, 0);
 }
 

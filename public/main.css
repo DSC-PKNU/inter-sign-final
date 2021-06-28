@@ -34,11 +34,26 @@ header {
 
 /* body */
 body {
-    margin: 1em;
-    height: 100vh;
-    color: rgba(0, 0, 0, 0.87);
+    height: 97vh;
     font-family: Roboto, Helvetica, Arial, sans-serif;
-    padding: 0;
+}
+
+.background {
+    z-index: -1;
+    width: 98vw;
+    height: 16vh;
+    background-image: url('../assets/images/white-yellow-grid.png');
+    background-repeat : no-repeat;
+}
+
+#big-logo {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    cursor: pointer;
 }
 
 #message {
@@ -107,7 +122,6 @@ button {
 }
 
 div#videos {
-    /* height: 65vh; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

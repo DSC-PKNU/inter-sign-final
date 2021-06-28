@@ -114,3 +114,6 @@ dist
 
 # private file
 serviceAccountKey.json
+
+# keras model file
+*.h5

@@ -1,4 +1,4 @@
-mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
+// mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
 
 const configuration = {
   iceServers: [
@@ -32,8 +32,8 @@ function init() {
 
   console.log("localStorage exist: " + localStorage.getItem("exist"));
   if (localStorage.getItem("exist") == 'true') {
-    var code = sessionStorage.getItem("code");
-    getExistRoom(code);
+    roomId = sessionStorage.getItem("code");
+    getExistRoom(roomId);
   } else {
     console.log("localStorage title: " + localStorage.getItem("title"));
     title = localStorage.getItem("title");
@@ -50,14 +50,14 @@ function init() {
 
   document.querySelector('#cameraBtn').addEventListener('click', openUserMedia);
   document.querySelector('#hangupBtn').addEventListener('click', hangUp);
-  document.querySelector('#createBtn').addEventListener('click', createRoom);
-  document.querySelector('#joinBtn').addEventListener('click', joinRoom);
-  roomDialog = new mdc.dialog.MDCDialog(document.querySelector('#room-dialog'));
+  // document.querySelector('#createBtn').addEventListener('click', createRoom);
+  // document.querySelector('#joinBtn').addEventListener('click', joinRoom);
+  // roomDialog = new mdc.dialog.MDCDialog(document.querySelector('#room-dialog'));
 }
 
 async function createRoom() {
-  document.querySelector('#createBtn').disabled = true;
-  document.querySelector('#joinBtn').disabled = true;
+  // document.querySelector('#createBtn').disabled = true;
+  // document.querySelector('#joinBtn').disabled = true;
   const db = firebase.firestore();
   const roomRef = await db.collection('rooms').doc();
 
@@ -109,7 +109,7 @@ async function createRoom() {
   await roomRef.set(roomWithOffer);
   roomId = roomRef.id;
   // roomId 서버로 전달
-  sendByPost(roomId, title, ["EN", "KR"], 1);
+  sendByPost(roomId, title, ["US", "KR"], 1);
   console.log(`New room created with SDP offer. Room ID: ${roomRef.id}`);
   document.querySelector(
       '#currentRoom').innerText = `Current room is ${roomRef.id} - You are the caller!`;
@@ -147,20 +147,20 @@ async function createRoom() {
   // Listen for remote ICE candidates above
 }
 
-function joinRoom() {
-  document.querySelector('#createBtn').disabled = true;
-  document.querySelector('#joinBtn').disabled = true;
+// function joinRoom() {
+//   document.querySelector('#createBtn').disabled = true;
+//   document.querySelector('#joinBtn').disabled = true;
 
-  document.querySelector('#confirmJoinBtn').
-      addEventListener('click', async () => {
-        roomId = document.querySelector('#room-id').value;
-        console.log('Join room: ', roomId);
-        document.querySelector(
-            '#currentRoom').innerText = `Current room is ${roomId} - You are the callee!`;
-        await joinRoomById(roomId);
-      }, {once: true});
-  roomDialog.open();
-}
+//   document.querySelector('#confirmJoinBtn').
+//       addEventListener('click', async () => {
+//         roomId = document.querySelector('#room-id').value;
+//         console.log('Join room: ', roomId);
+//         document.querySelector(
+//             '#currentRoom').innerText = `Current room is ${roomId} - You are the callee!`;
+//         await joinRoomById(roomId);
+//       }, {once: true});
+//   roomDialog.open();
+// }
 
 async function joinRoomById(roomId) {
   const db = firebase.firestore();
@@ -249,8 +249,8 @@ async function openUserMedia(e) {
 
   console.log('Stream:', document.querySelector('#localVideo').srcObject);
   document.querySelector('#cameraBtn').disabled = true;
-  document.querySelector('#joinBtn').disabled = false;
-  document.querySelector('#createBtn').disabled = false;
+  // document.querySelector('#joinBtn').disabled = false;
+  // document.querySelector('#createBtn').disabled = false;
   document.querySelector('#hangupBtn').disabled = false;
 
   createRoom();
@@ -266,11 +266,11 @@ async function openUserMediaAndJoin(code) {
 
   console.log('Stream:', document.querySelector('#localVideo').srcObject);
   document.querySelector('#cameraBtn').disabled = true;
-  document.querySelector('#joinBtn').disabled = false;
-  document.querySelector('#createBtn').disabled = false;
+  // document.querySelector('#joinBtn').disabled = false;
+  // document.querySelector('#createBtn').disabled = false;
   document.querySelector('#hangupBtn').disabled = false;
 
-  joinRoomById(code);
+  joinRoomById(roomId);
 }
 
 async function hangUp(e) {
@@ -290,13 +290,13 @@ async function hangUp(e) {
   document.querySelector('#localVideo').srcObject = null;
   document.querySelector('#remoteVideo').srcObject = null;
   document.querySelector('#cameraBtn').disabled = false;
-  document.querySelector('#joinBtn').disabled = true;
-  document.querySelector('#createBtn').disabled = true;
+  // document.querySelector('#joinBtn').disabled = true;
+  // document.querySelector('#createBtn').disabled = true;
   document.querySelector('#hangupBtn').disabled = true;
   document.querySelector('#currentRoom').innerText = '';
 
   // Delete room on hangup
-  if (roomId) {
+  if (roomId && sendHangup(roomId)) {
     const db = firebase.firestore();
     const roomRef = db.collection('rooms').doc(roomId);
     const calleeCandidates = await roomRef.collection('calleeCandidates').get();
@@ -310,7 +310,7 @@ async function hangUp(e) {
     await roomRef.delete();
   }
 
-  sendHangup(roomId);
+  window.location.href = "/room_list";
 }
 
 function registerPeerConnectionListeners() {
@@ -344,6 +344,7 @@ async function interpret() {
   var modelURL, metadataURL; 
 
   URL = "../asl-model/my_model/";
+  // URL = "../asl-model/new_model/";
   modelURL = URL + "model.json";
   metadataURL = URL + "metadata.json";
   
@@ -415,7 +416,18 @@ function sendHangup(code) {
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.send(JSON.stringify(data));
 
-  window.location.href = "/room_list";
+  // 현재 방의 인원수가 1인지 응답 받아야 함
+  xhr.onload = (e) => {
+    var res = xhr.response;
+    console.log("sendHangup res: " + res);
+    res = JSON.parse(res);
+
+    if (res.num == "1") {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 function getExistRoom(code) {
