@@ -22,7 +22,7 @@ public
 ## 🌏 WEB FLOW
 
 ### - Prototype (designed using Figma)
-![intersign_figma](https://user-images.githubusercontent.com/46439700/112598368-d1e6ef80-8e51-11eb-83cf-e2554f81c933.JPG)
+![intersign-prototype](https://user-images.githubusercontent.com/39328846/123708074-c3bbcb80-d8a5-11eb-83ce-e5bad304e5ca.PNG)
 
 ### - Introduce InterSign
 
@@ -33,14 +33,11 @@ public
 ### - Join the chat room
 
 
-## 🌏 ROLE
+## 🌏 DEVELOPER
 
-
-|  이름  | 역할           | github                                                   |
-| :----: | :-------------: | :-------------------------------------------------------: |
-| 김보금 | ML DEVELOPER   | [@nsbg](https://github.com/nsbg)                           |
-| 김혜성 | WEB DEVELOPER   | [@Hyesung82](https://github.com/Hyesung82)                |
-| 박다봄 | VIDEO PRODUCER | [@emptyshores](https://github.com/emptyshores)            |
+| 김보금 Bogeum Kim  | ML DEVELOPER              | [@nsbg](https://github.com/nsbg)               |
+| 김혜성 Hyesung Kim | WEB DEVELOPER             | [@Hyesung82](https://github.com/Hyesung82)     |
+| 박다봄 Dabom Park  | DESIGNER & VIDEO PRODUCER | [@emptyshores](https://github.com/emptyshores) |
 
 
 
