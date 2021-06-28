@@ -19,7 +19,7 @@
 }
 
 body {
-    height: 97vh;
+    height: 95vh;
     font-family: "nico";
 }
 
@@ -219,18 +219,21 @@ h2#language {
     font-family: "noto-bold";
     color: #B0B0B0;
     width: 60px;
+    padding: 5px;
 }
 
 #data-title {
     font-family: "noto-regular";
     color: #5C5C5C;
     width: 500px;
+    padding: 5px;
 }
 
 #data-people {
     font-family: "noto-medium";
     color: #06BCC8;
     width: 30px;
+    padding: 5px;
 }
 
 #new-button {
@@ -265,7 +268,7 @@ h2#language {
     font-family: nico;
     cursor: pointer;
     position: absolute;
-    top: 200px;
+    top: 65%;
     left: 50%;
     transform: translate(-50%, 0);
 }
