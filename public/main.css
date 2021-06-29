@@ -172,6 +172,14 @@ span {
     -webkit-transform:rotateY(180deg);
 }
 
+#micBtn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-250%, 0);
+}
+
 #hangupBtn {
     width: 30px;
     height: 30px;

@@ -48,6 +48,7 @@ function init() {
   //   openUserMedia();
   // }
 
+  document.querySelector('#micBtn').addEventListener('click', turnOnMic);
   document.querySelector('#cameraBtn').addEventListener('click', openUserMedia);
   document.querySelector('#hangupBtn').addEventListener('click', hangUp);
   // document.querySelector('#createBtn').addEventListener('click', createRoom);
@@ -236,6 +237,18 @@ async function joinRoomById(roomId) {
       });
     });
     // Listening for remote ICE candidates above
+  }
+}
+
+function turnOnMic() {
+  var vid = document.getElementById("localVideo");
+  var mic = document.getElementById("micBtn");
+  if (vid.muted == true) {
+    vid.muted = false;
+    mic.src="assets/images/mic_off.png";
+  } else {
+    vid.muted = true;
+    mic.src="assets/images/microphone_on.png";
   }
 }
 
