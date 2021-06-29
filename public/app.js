@@ -69,6 +69,7 @@ async function createRoom() {
   channel = peerConnection.createDataChannel("sub");
   channel.onopen = function(event) {
     interpret();
+    // predictWebcam();
   }
   channel.onmessage = function(event) {
     console.log(event.data);
@@ -176,6 +177,7 @@ async function joinRoomById(roomId) {
       channel = event.channel;
         channel.onopen = function(event) {
         interpret();
+        // predictWebcam();
       }
       channel.onmessage = function(event) {
         console.log(event.data);
@@ -351,13 +353,15 @@ function registerPeerConnectionListeners() {
 var URL;
 
 let model, webcam, labelContainer, maxPredictions;
+const aslList = ["Baby", "Brother", "Don't like", "Friend", "Help", "House", "Like", "Love", "Make", "More", "Name",
+  "No", "Pay", "Play", "Stop", "With", "Yes"];
 
 // Load the image model and setup the webcam
 async function interpret() {
   var modelURL, metadataURL; 
 
-  URL = "../asl-model/my_model/";
-  // URL = "../asl-model/new_model/";
+  // URL = "../asl-model/my_model/";
+  URL = "../asl-model/new_model/";
   modelURL = URL + "model.json";
   metadataURL = URL + "metadata.json";
   
@@ -365,13 +369,16 @@ async function interpret() {
   console.log("model root", modelURL);
 
   // load the model and metadata
-  model = await tmImage.load(modelURL, metadataURL);
-  console.log()
-  maxPredictions = model.getTotalClasses();
+  // model = await tmImage.load(modelURL, metadataURL);
+  model = await tf.loadLayersModel("../asl-model/new_model/model.json");
+  console.log();
+  // maxPredictions = model.getTotalClasses();
+  maxPredictions = aslList.length;
 
   // Setup a webcam
   const flip = true; 
-  webcam = new tmImage.Webcam(640, 320, flip); // width, height, flip
+  // webcam = new tmImage.Webcam(640, 320, flip); // width, height, flip
+  webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
   await webcam.setup(); // request access to the webcam
   await webcam.play();
   window.requestAnimationFrame(loop);
@@ -393,9 +400,11 @@ async function loop() {
 // run the webcam image through the image model
 async function predict() {
     // predict can take in an image, video or canvas html element
-    const prediction = await model.predict(webcam.canvas);
+    console.log("webcam.canvase type:", typeof webcam.canvas);
+    let tensor = tf.expandDims(tf.browser.fromPixels(webcam.canvas), axis=0)
+    const prediction = await model.predict(tensor);
     for (let i = 0; i < maxPredictions; i++) {
-        const classPrediction = prediction[i].probability.toFixed(2) >= 0.75 ? prediction[i].className : ' ';
+        const classPrediction = prediction.argMax().dataSync()[0] >= 0.75 ? aslList[i] : ' ';
         labelContainer.childNodes[i].innerHTML = classPrediction;
         channel.send(classPrediction);
     }

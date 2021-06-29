@@ -46,7 +46,6 @@ table {
     top: 170px;
     left: 50%;
     transform: translate(-50%, 0px);
-    border-collapse: collapse;
     width: 640px;
 }
 
@@ -194,7 +193,6 @@ h2#language {
 
 #room-list {
     font-size: 18px;
-    margin-bottom: 11px;
     width: 645px;
     height: 49px;
     position: absolute;
@@ -206,13 +204,49 @@ h2#language {
     border: 1px solid #06BCC8;
     background-color: white;
     height: 50px;
+    margin-bottom: 5px;
 }
+
+table {
+    border-spacing:0;
+    margin:1em;
+  }
+th {
+    padding:1em;
+    width:50px;
+    background:linear-gradient(to top, gray  , lightgray);
+  }
+  th , td:after{/* pseudo */
+    border:1px solid;
+  }
+
+td {
+    text-align:center;
+    background:linear-gradient(to bottom, transparent 1em, gray 1em, lightgray);/* drawn at 1em from top till bottom */
+    position:relative;/* for the pseudo */
+    padding:2em  1em 1em /* 1em on top will be needed here for the demo gap */
+  }
+
+td:after {/* here comes the border leaving 1em gap in between trs */
+    content:'';
+    position:absolute;
+    /* size it via coordonates */
+    left:0;
+    right:0;
+    top:1em;/* leaves a gap of 1em at the top, do not forget to clear this space within the td with appropriate padding */
+    bottom:0;
+  }
+
+  td:last-of-type {
+    width:70px;
+  }
 
 #data-no {
     font-family: "noto-bold";
     color: #06BCC8;
     width: 30px;
     padding: 5px;
+    text-align: center;
 }
 
 #data-lang {
@@ -234,6 +268,10 @@ h2#language {
     color: #06BCC8;
     width: 30px;
     padding: 5px;
+}
+
+#page-num {
+    height: 100px;
 }
 
 #new-button {
