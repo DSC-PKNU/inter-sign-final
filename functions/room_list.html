@@ -10,8 +10,8 @@
             function buildTable(data) {
                 var table = document.getElementById('room-list');
                 for (var i=0; i < data.length; i++) {
-                    var row = `<tr id="room-row" onclick="sendByPost('${data[i].code}');"> <td id="data-no">${data[i].no}</td> <td id="data-lang">${data[i].lang}</td> 
-                        <td id="data-title">${data[i].title}</td> <td id="data-people">${data[i].people}/4</td> </tr>`;
+                    var row = `<tr id="room-row" onclick="sendByPost('${data[i].code}');"> <td id="data-no" class="border-left">${data[i].no}</td> <td id="data-lang" class="border-vertical">${data[i].lang}</td> 
+                        <td id="data-title" class="border-vertical">${data[i].title}</td> <td id="data-people" class="border-right">${data[i].people}/4</td> </tr>`;
                     table.innerHTML += row;
                 }
             }
@@ -95,10 +95,10 @@
         </script>
     </head>
     <body>
-        <div class="background"></div>
+        <div id="bg-list" class="background"></div>
         <img id="small-logo" src="./assets/images/intersign_logo.png" onclick="location.href='/'">
-        <h1 class="small-title" onclick="location.href='/'">InterSign</h1>
-        <hr class="line" id="small-line">
+        <h1 class="medium-title" onclick="location.href='/'">InterSign</h1>
+        <hr class="line" id="medium-line">
         <h2 class="sub-title">Join the new chat</h2>
 
         <div id="refresh" onclick="getRoomList()">

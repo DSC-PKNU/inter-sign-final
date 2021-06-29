@@ -167,6 +167,13 @@ span {
     font-family: nico;
 }
 
+#webcam-container {
+    z-index: -1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
 #localVideo {
     transform: rotateY(180deg);
     -webkit-transform:rotateY(180deg);

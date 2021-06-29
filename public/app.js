@@ -400,13 +400,14 @@ async function loop() {
 // run the webcam image through the image model
 async function predict() {
     // predict can take in an image, video or canvas html element
-    console.log("webcam.canvase type:", typeof webcam.canvas);
     let tensor = tf.expandDims(tf.browser.fromPixels(webcam.canvas), axis=0)
-    const prediction = await model.predict(tensor);
+    // console.log("tensor:", tensor);
+    const prediction = await model.predict(tensor).data();
     for (let i = 0; i < maxPredictions; i++) {
-        const classPrediction = prediction.argMax().dataSync()[0] >= 0.75 ? aslList[i] : ' ';
-        labelContainer.childNodes[i].innerHTML = classPrediction;
-        channel.send(classPrediction);
+      console.log("prediction:", prediction);
+      const classPrediction = prediction[i] == 1 ? aslList[i] : ' ';
+      labelContainer.childNodes[i].innerHTML = classPrediction;
+      channel.send(classPrediction);
     }
 }
 

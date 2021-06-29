@@ -42,7 +42,7 @@ app.post("/join_exist_room", function(request, response) {
   let lang;
   let ppl;
   let title;
-  let updates = {};
+  const updates = {};
   let data = null;
 
   console.log("Received code: " + code.toString());
@@ -135,12 +135,12 @@ app.post("/hang_up", function(req, res) {
   console.log("서버 hang_up 호출: " + roomCode);
 
   let data = null;
-  let updates = {};
-  let resData = {};
+  const updates = {};
+  const resData = {};
 
   // Number of people
-  var dbNopRef = admin.database().ref('rooms/' + roomCode + '/num_of_people');
-  dbNopRef.once('value', (snapshot) => {
+  const dbNopRef = admin.database().ref("rooms/" + roomCode + "/num_of_people");
+  dbNopRef.once("value", (snapshot) => {
     data = snapshot.val();
     console.log("/hang_up data: " + data);
     resData["num"] = data;

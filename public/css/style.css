@@ -47,6 +47,7 @@ table {
     left: 50%;
     transform: translate(-50%, 0px);
     width: 640px;
+    border-spacing: 0;
 }
 
 h2#room-title {
@@ -60,31 +61,38 @@ h2#language {
 .background {
     z-index: -1;
     width: 98vw;
-    height: 40vh;
     background-image: url('../assets/images/white-yellow-grid.png');
     background-repeat : no-repeat;
 }
 
 .big-title {
-    font-size: 36px;
+    font-size: 60px;
     position: absolute;
-    top: 30%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     cursor: pointer;
 }
 
+.medium-title {
+    font-size: 40px;
+    position: absolute;
+    top: 60px;
+    left: 200px;
+    transform: translate(0, -50%);
+    cursor: pointer;
+}
+
 .small-title {
-    font-size: 36px;
+    font-size: 32px;
     position: absolute;
     top: 30px;
-    left: 143px;
+    left: 10px;
     transform: translate(0, -50%);
     cursor: pointer;
 }
 
 .line { 
-    width: 281px;
     height: 4px;
     background-color: #06BCC8;
     border: none;
@@ -92,11 +100,28 @@ h2#language {
 }
 
 .sub-title {
-    font-size: 18px;
+    font-size: 24px;
     position: absolute;
-    top: 56px;
-    left: 416px;
+    top: 88px;
+    left: 512px;
     transform: translate(0, -50%);
+}
+
+.border-left {
+    border-left: 1px solid #06BCC8;
+    border-top: 1px solid #06BCC8;
+    border-bottom: 1px solid #06BCC8;
+}
+
+.border-vertical {
+    border-top: 1px solid #06BCC8;
+    border-bottom: 1px solid #06BCC8;
+}
+
+.border-right {
+    border-right: 1px solid #06BCC8;
+    border-top: 1px solid #06BCC8;
+    border-bottom: 1px solid #06BCC8;
 }
 
 .create {
@@ -122,50 +147,61 @@ h2#language {
     background-image: none;
 }
 
+#bg-index {
+    height: 60%;
+}
+
+#bg-list {
+    height: 170px;
+}
+
 #big-logo {
-    width: 137px;
-    height: 136px;
+    width: 260px;
+    height: 260px;
     position: absolute;
-    top: 9%;
+    top: 5%;
     left: 50%;
     transform: translate(-50%, 0);
     cursor: pointer;
 }
 
 #small-logo {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     position: absolute;
-    top: 27px;
-    left: 21px;
+    top: 40px;
+    left: 40px;
     cursor: pointer;
 }
 
 #big-line {
-    top: 35%;
+    width: 460px;
+    top: 49%;
     left: 50%;
     transform: translate(-50%, 0);
 }
 
-#small-line {
-    top: 73px;
-    left: 116px;
+#medium-line {
+    width: 340px;
+    top: 104px;
+    left: 160px;
 }
 
 #desc {
     font-family: monospace;
     font-size: 28px;
     position: absolute;
-    top: 52%;
+    top: 66%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
 }
 
 #start-button {
-    width: 150px;
+    width: 200px;
+    height: 60px;
     position: absolute;
-    top: 70%;
+    top: 80%;
     left: 50%;
     transform: translate(-50%, 0);
     transition:all 0.9s, color 0.3;
@@ -201,31 +237,11 @@ h2#language {
 
 #room-row {
     cursor: pointer;
-    border: 1px solid #06BCC8;
-    background-color: white;
-    height: 50px;
-    margin-bottom: 5px;
 }
 
-table {
-    border-spacing:0;
-    margin:1em;
-  }
-th {
-    padding:1em;
-    width:50px;
-    background:linear-gradient(to top, gray  , lightgray);
-  }
-  th , td:after{/* pseudo */
-    border:1px solid;
-  }
-
 td {
-    text-align:center;
-    background:linear-gradient(to bottom, transparent 1em, gray 1em, lightgray);/* drawn at 1em from top till bottom */
-    position:relative;/* for the pseudo */
-    padding:2em  1em 1em /* 1em on top will be needed here for the demo gap */
-  }
+    padding: 1em 1em 1em
+}
 
 td:after {/* here comes the border leaving 1em gap in between trs */
     content:'';
@@ -245,7 +261,6 @@ td:after {/* here comes the border leaving 1em gap in between trs */
     font-family: "noto-bold";
     color: #06BCC8;
     width: 30px;
-    padding: 5px;
     text-align: center;
 }
 
@@ -253,21 +268,18 @@ td:after {/* here comes the border leaving 1em gap in between trs */
     font-family: "noto-bold";
     color: #B0B0B0;
     width: 60px;
-    padding: 5px;
 }
 
 #data-title {
     font-family: "noto-regular";
     color: #5C5C5C;
     width: 500px;
-    padding: 5px;
 }
 
 #data-people {
     font-family: "noto-medium";
     color: #06BCC8;
     width: 30px;
-    padding: 5px;
 }
 
 #page-num {
@@ -287,12 +299,15 @@ td:after {/* here comes the border leaving 1em gap in between trs */
 }
 
 #popup-line {
-    top: 73px;
+    top: 64px;
     left: 21px;
+    width: 250px;
 }
 
 #popup-sub {
-    left: 321px;
+    left: 280px;
+    top: 50px;
+    font-size: 20px;
 }
 
 #create-button {
