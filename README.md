@@ -10,12 +10,12 @@ Video chat service for international sign language exchange
 
 
 ## 🌏 RUN
-- https://intersign-dca94.web.app/
-1. Press the button to start. ![intersign-start-button](https://user-images.githubusercontent.com/39328846/124018868-4cac4180-da23-11eb-97a2-99005c039eab.PNG)
-2. If you don't have a chat room you want to enter, click the text. ![intersign-roomlist-button](https://user-images.githubusercontent.com/39328846/124019110-98f78180-da23-11eb-8ad9-53e64a52866f.PNG)
-3. Click on the room you want. ![intersign-exist-room](https://user-images.githubusercontent.com/39328846/124019500-1a4f1400-da24-11eb-984a-91f58056969e.PNG) Or if you still don't have the room you want, click the button to create a new room. ![intersign-new-button](https://user-images.githubusercontent.com/39328846/124019647-45396800-da24-11eb-8af0-2a31cd22aea5.PNG)
-4. Enjoy video chat with sign language translation.
-5. Click the button to end the video chat. ![intersign-hangup-button](https://user-images.githubusercontent.com/39328846/124019989-b1b46700-da24-11eb-8fce-b8effcc75638.PNG)
+1. Follow the link. https://intersign-dca94.web.app/
+2. Press the button to start. ![intersign-start-button](https://user-images.githubusercontent.com/39328846/124018868-4cac4180-da23-11eb-97a2-99005c039eab.PNG)
+3. If you don't have a chat room you want to enter, click the text. ![intersign-roomlist-button](https://user-images.githubusercontent.com/39328846/124019110-98f78180-da23-11eb-8ad9-53e64a52866f.PNG)
+4. Click on the room you want. ![intersign-exist-room](https://user-images.githubusercontent.com/39328846/124019500-1a4f1400-da24-11eb-984a-91f58056969e.PNG) Or if you still don't have the room you want, click the button to create a new room. ![intersign-new-button](https://user-images.githubusercontent.com/39328846/124019647-45396800-da24-11eb-8af0-2a31cd22aea5.PNG)
+5. Enjoy video chat with sign language translation.
+6. Click the button to end the video chat. ![intersign-hangup-button](https://user-images.githubusercontent.com/39328846/124019989-b1b46700-da24-11eb-8fce-b8effcc75638.PNG)
 
 
 ## 🌏 STRUCT
