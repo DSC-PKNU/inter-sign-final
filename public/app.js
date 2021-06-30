@@ -1,5 +1,3 @@
-// mdc.ripple.MDCRipple.attachTo(document.querySelector('.mdc-button'));
-
 const configuration = {
   iceServers: [
     {
@@ -34,11 +32,6 @@ const kslList = ["나중에", "놀다", "뭐했어요", "반갑습니다", "부�
 init();
 
 function init() {
-  console.log("init() 호출");
-  // title = document.title;
-  // title = title.substring(0, title.length - 12);
-  // console.log("app title: " + title);
-
   console.log("localStorage exist: " + localStorage.getItem("exist"));
   if (localStorage.getItem("exist") == 'true') {
     roomId = sessionStorage.getItem("code");
@@ -60,24 +53,11 @@ function init() {
 
   console.log('current user\'s language', URL);
 
-  // if (title == '') {
-  //   var code = sessionStorage.getItem("code");
-  //   getExistRoom(code);
-  // } else {
-  //   openUserMedia();
-  // }
-
   document.querySelector('#micBtn').addEventListener('click', turnOnMic);
-  document.querySelector('#cameraBtn').addEventListener('click', openUserMedia);
   document.querySelector('#hangupBtn').addEventListener('click', hangUp);
-  // document.querySelector('#createBtn').addEventListener('click', createRoom);
-  // document.querySelector('#joinBtn').addEventListener('click', joinRoom);
-  // roomDialog = new mdc.dialog.MDCDialog(document.querySelector('#room-dialog'));
 }
 
 async function createRoom() {
-  // document.querySelector('#createBtn').disabled = true;
-  // document.querySelector('#joinBtn').disabled = true;
   const db = firebase.firestore();
   const roomRef = await db.collection('rooms').doc();
 
@@ -89,9 +69,6 @@ async function createRoom() {
   channel.onopen = function(event) {
     interpret();
     
-    // for (let i = 0; i < maxPredictions; i++) {
-    //   remoteLabelContainer.appendChild(document.createElement("div"));
-    // }
     remoteLabelContainer.appendChild(document.createElement("div"));
   }
   channel.onmessage = function(event) {
@@ -171,21 +148,6 @@ async function createRoom() {
   });
   // Listen for remote ICE candidates above
 }
-
-// function joinRoom() {
-//   document.querySelector('#createBtn').disabled = true;
-//   document.querySelector('#joinBtn').disabled = true;
-
-//   document.querySelector('#confirmJoinBtn').
-//       addEventListener('click', async () => {
-//         roomId = document.querySelector('#room-id').value;
-//         console.log('Join room: ', roomId);
-//         document.querySelector(
-//             '#currentRoom').innerText = `Current room is ${roomId} - You are the callee!`;
-//         await joinRoomById(roomId);
-//       }, {once: true});
-//   roomDialog.open();
-// }
 
 async function joinRoomById(roomId) {
   const db = firebase.firestore();
@@ -287,8 +249,6 @@ async function openUserMedia(e) {
 
   console.log('Stream:', document.querySelector('#localVideo').srcObject);
   document.querySelector('#cameraBtn').disabled = true;
-  // document.querySelector('#joinBtn').disabled = false;
-  // document.querySelector('#createBtn').disabled = false;
   document.querySelector('#hangupBtn').disabled = false;
 
   createRoom();
@@ -304,8 +264,6 @@ async function openUserMediaAndJoin(code) {
 
   console.log('Stream:', document.querySelector('#localVideo').srcObject);
   document.querySelector('#cameraBtn').disabled = true;
-  // document.querySelector('#joinBtn').disabled = false;
-  // document.querySelector('#createBtn').disabled = false;
   document.querySelector('#hangupBtn').disabled = false;
 
   joinRoomById(roomId);
@@ -328,8 +286,6 @@ async function hangUp(e) {
   document.querySelector('#localVideo').srcObject = null;
   document.querySelector('#remoteVideo').srcObject = null;
   document.querySelector('#cameraBtn').disabled = false;
-  // document.querySelector('#joinBtn').disabled = true;
-  // document.querySelector('#createBtn').disabled = true;
   document.querySelector('#hangupBtn').disabled = true;
   document.querySelector('#currentRoom').innerText = '';
 
@@ -376,17 +332,13 @@ function registerPeerConnectionListeners() {
 
 // Load the image model and setup the webcam
 async function interpret() {
-  // load the model and metadata
-  // model = await tmImage.load(modelURL, metadataURL);
+  // load the model
   model = await tf.loadLayersModel("../asl-model/new_model/model.json");
   console.log();
-  // maxPredictions = model.getTotalClasses();
-  // maxPredictions = aslList.length;
   maxPredictions = classification.length;
 
   // Setup a webcam
-  const flip = true; 
-  // webcam = new tmImage.Webcam(640, 320, flip); // width, height, flip
+  const flip = true;
   webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
   await webcam.setup(); // request access to the webcam
   await webcam.play();
@@ -492,16 +444,3 @@ function getExistRoom(code) {
     document.title = title + " - InterSign";
   }
 }
-
-// function sendMessage(msg) {
-//   if (!channel) {
-//     logError('Connection has not been initiated. ' +
-//       'Get two peers in the same room first');
-//     return;
-//   } else if (channel.readyState === 'closed') {
-//     logError('Connection was lost. Peer closed the connection.');
-//     return;
-//   }
-
-//   channel.send(msg);
-// }
