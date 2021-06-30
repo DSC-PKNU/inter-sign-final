@@ -24,7 +24,7 @@ functions
 public
 ```
 
-## 🌏 WEB FLOW
+## 🌏 FLOW
 
 ### - Prototype (designed using Figma)
 ![intersign-prototype](https://user-images.githubusercontent.com/39328846/123708074-c3bbcb80-d8a5-11eb-83ce-e5bad304e5ca.PNG)
