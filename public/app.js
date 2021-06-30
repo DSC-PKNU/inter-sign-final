@@ -18,9 +18,18 @@ let remoteStream = null;
 let roomDialog = null;
 let roomId = null;
 let channel = null;
+let receiveChannel;
+const remoteLabelContainer = document.getElementById("remoteLabel-container");
 
 var title = null;
 var curRoomData = new Object();
+
+var URL;
+
+let model, webcam, labelContainer, maxPredictions, classification;
+const aslList = ["Baby", "Brother", "Don't like", "Friend", "Help", "House", "Like", "Love", "Make", "More", "Name",
+  "No", "Pay", "Play", "Stop", "With", "Yes"];
+const kslList = ["나중에", "놀다", "뭐했어요", "반갑습니다", "부산", "오늘", "오세요", "요리", "저는", "좋아합니다", "취미"];
 
 init();
 
@@ -33,13 +42,23 @@ function init() {
   console.log("localStorage exist: " + localStorage.getItem("exist"));
   if (localStorage.getItem("exist") == 'true') {
     roomId = sessionStorage.getItem("code");
+    
+    URL = "../ksl-model/new_model/model.json";
+    classification = kslList;
+    
     getExistRoom(roomId);
   } else {
     console.log("localStorage title: " + localStorage.getItem("title"));
     title = localStorage.getItem("title");
     document.title = title + " - InterSign";
+
+    URL = "../asl-model/new_model/model.json";
+    classification = aslList;
+
     openUserMedia();
   }
+
+  console.log('current user\'s language', URL);
 
   // if (title == '') {
   //   var code = sessionStorage.getItem("code");
@@ -69,13 +88,17 @@ async function createRoom() {
   channel = peerConnection.createDataChannel("sub");
   channel.onopen = function(event) {
     interpret();
-    // predictWebcam();
+    
+    // for (let i = 0; i < maxPredictions; i++) {
+    //   remoteLabelContainer.appendChild(document.createElement("div"));
+    // }
+    remoteLabelContainer.appendChild(document.createElement("div"));
   }
   channel.onmessage = function(event) {
-    console.log(event.data);
-    let remoteLabelContainer = document.getElementById("remoteLabel-container");
-    remoteLabelContainer.appendChild(document.createElement("div"));
-    remoteLabelContainer.childNodes[0].innerHTML = event.data;
+    let subtitle = document.getElementById("remoteSub");
+
+    console.log("From remote cam:", event.data);
+    subtitle.innerText = event.data;
   }
 
   registerPeerConnectionListeners();
@@ -175,15 +198,15 @@ async function joinRoomById(roomId) {
     peerConnection = new RTCPeerConnection(configuration);
     peerConnection.ondatachannel = function(event) {
       channel = event.channel;
-        channel.onopen = function(event) {
+      channel.onopen = function(event) {
         interpret();
         // predictWebcam();
       }
       channel.onmessage = function(event) {
-        console.log(event.data);
-        let remoteLabelContainer = document.getElementById("remoteLabel-container");
-        remoteLabelContainer.appendChild(document.createElement("div"));
-        remoteLabelContainer.childNodes[0].innerHTML = event.data;
+        let subtitle = document.getElementById("remoteSub");
+
+        console.log("From remote cam:", event.data);
+        subtitle.innerText = event.data;
       }
     }
     registerPeerConnectionListeners();
@@ -350,30 +373,16 @@ function registerPeerConnectionListeners() {
 
 
 /* Interpretation part */
-var URL;
-
-let model, webcam, labelContainer, maxPredictions;
-const aslList = ["Baby", "Brother", "Don't like", "Friend", "Help", "House", "Like", "Love", "Make", "More", "Name",
-  "No", "Pay", "Play", "Stop", "With", "Yes"];
 
 // Load the image model and setup the webcam
 async function interpret() {
-  var modelURL, metadataURL; 
-
-  // URL = "../asl-model/my_model/";
-  URL = "../asl-model/new_model/";
-  modelURL = URL + "model.json";
-  metadataURL = URL + "metadata.json";
-  
-  console.log('current user\'s language', URL);
-  console.log("model root", modelURL);
-
   // load the model and metadata
   // model = await tmImage.load(modelURL, metadataURL);
   model = await tf.loadLayersModel("../asl-model/new_model/model.json");
   console.log();
   // maxPredictions = model.getTotalClasses();
-  maxPredictions = aslList.length;
+  // maxPredictions = aslList.length;
+  maxPredictions = classification.length;
 
   // Setup a webcam
   const flip = true; 
@@ -403,9 +412,10 @@ async function predict() {
     let tensor = tf.expandDims(tf.browser.fromPixels(webcam.canvas), axis=0)
     // console.log("tensor:", tensor);
     const prediction = await model.predict(tensor).data();
+    // console.log("prediction:", prediction);
     for (let i = 0; i < maxPredictions; i++) {
-      console.log("prediction:", prediction);
-      const classPrediction = prediction[i] == 1 ? aslList[i] : ' ';
+      // const classPrediction = prediction[i] == 1 ? aslList[i] : ' ';
+      const classPrediction = prediction[i] >= 0.66 ? classification[i] : ' ';
       labelContainer.childNodes[i].innerHTML = classPrediction;
       channel.send(classPrediction);
     }
@@ -482,3 +492,16 @@ function getExistRoom(code) {
     document.title = title + " - InterSign";
   }
 }
+
+// function sendMessage(msg) {
+//   if (!channel) {
+//     logError('Connection has not been initiated. ' +
+//       'Get two peers in the same room first');
+//     return;
+//   } else if (channel.readyState === 'closed') {
+//     logError('Connection was lost. Peer closed the connection.');
+//     return;
+//   }
+
+//   channel.send(msg);
+// }

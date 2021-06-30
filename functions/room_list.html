@@ -11,7 +11,7 @@
                 var table = document.getElementById('room-list');
                 for (var i=0; i < data.length; i++) {
                     var row = `<tr id="room-row" onclick="sendByPost('${data[i].code}');"> <td id="data-no" class="border-left">${data[i].no}</td> <td id="data-lang" class="border-vertical">${data[i].lang}</td> 
-                        <td id="data-title" class="border-vertical">${data[i].title}</td> <td id="data-people" class="border-right">${data[i].people}/4</td> </tr>`;
+                        <td id="data-title" class="border-vertical">${data[i].title}</td> <td id="data-people" class="border-right">${data[i].people}/2</td> </tr>`;
                     table.innerHTML += row;
                 }
             }
