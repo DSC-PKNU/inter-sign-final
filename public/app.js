@@ -315,10 +315,16 @@ function registerPeerConnectionListeners() {
 
   peerConnection.addEventListener('connectionstatechange', () => {
     console.log(`Connection state change: ${peerConnection.connectionState}`);
+
+    if (peerConnection.connectionState == "failed") {
+      removeRoom(roomId);
+      window.alert("This room is not activated.");
+      window.location.href = "/room_list";
+    }
   });
 
   peerConnection.addEventListener('signalingstatechange', () => {
-    console.log(`Signaling state change: ${peerConnection.signalingState}`);
+    console.log(`Signaling state: ${peerConnection.signalingState}`);
   });
 
   peerConnection.addEventListener('iceconnectionstatechange ', () => {
@@ -443,4 +449,17 @@ function getExistRoom(code) {
     console.log("Current room title: " + title);
     document.title = title + " - InterSign";
   }
+}
+
+function removeRoom(code) {
+  console.log("removeRoom 호출");
+
+  const url = "remove_room";
+  var xhr = new XMLHttpRequest();
+
+  xhr.open('POST', url, true);
+  var data = new Object();
+  data.code = code;
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify(data));
 }

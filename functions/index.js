@@ -158,7 +158,14 @@ app.post("/hang_up", function(req, res) {
   res.send(resData);
 });
 
-// app.listen(3000, function() {
-//   console.log('Example app listening on port 3000!')
-// });
+app.post("/remove_room", function(req, res) {
+  const roomCode = req.body.code;
+
+  const dbRef = admin.database().ref("rooms/"+roomCode);
+  dbRef.remove();
+  console.log("/remove_room");
+
+  res.end();
+});
+
 exports.app1 = functions.https.onRequest(app);
