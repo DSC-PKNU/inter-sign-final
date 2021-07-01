@@ -7,7 +7,7 @@ Video chat service for international sign language exchange
 - Back-end : Node.js
 - Hosting : Firebase
 - Machine Learning : Tensorflow, Jupyter Notebook   
-    * Dataset for ML : Korean Sign language(created by own web-cam), American Sign language[ASL](https://www.kaggle.com/belalelwikel/asl-and-some-words)
+    * Dataset for ML : Korean Sign language(created by own web-cam), [American Sign Language](https://www.kaggle.com/belalelwikel/asl-and-some-words)
 
 
 ## 🌏 RUN
