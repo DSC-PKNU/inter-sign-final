@@ -40,7 +40,7 @@ public
 ![intersign-new](https://user-images.githubusercontent.com/39328846/124008594-88d9a500-da17-11eb-994e-20f076516023.PNG)
 
 ### - Join the chat room
-![intersign-chatroom-1](https://user-images.githubusercontent.com/39328846/124066954-80638780-da74-11eb-9421-b91c9bf3ff13.png) ![intersign-chatroom-2](https://user-images.githubusercontent.com/39328846/124067026-9f621980-da74-11eb-94a5-c539695eae2b.png)
+![intersign-chatroom-2](https://user-images.githubusercontent.com/39328846/124067179-e4864b80-da74-11eb-92e9-a6b94749f52d.png)
 
 
 ## 🌏 DEVELOPER
