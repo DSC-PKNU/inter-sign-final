@@ -19,12 +19,6 @@ Video chat service for international sign language exchange
 6. Click the button to end the video chat. ![intersign-hangup-button](https://user-images.githubusercontent.com/39328846/124019989-b1b46700-da24-11eb-8fce-b8effcc75638.PNG)
 
 
-## 🌏 STRUCT
-```
-functions
-public
-```
-
 
 ## 🌏 FLOW
 
